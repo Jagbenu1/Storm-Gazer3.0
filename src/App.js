@@ -1,11 +1,9 @@
 // import logo from './logo.svg';
-import './App.css';
-import StormGazer from './containers/StormGazer';
+import "./App.css";
+import StormGazer from "./containers/StormGazer";
 
 const App = () => {
-  return (
-    <StormGazer />
-  )
-}
+  return <StormGazer />;
+};
 
 export default App;
