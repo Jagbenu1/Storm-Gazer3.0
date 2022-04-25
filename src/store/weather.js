@@ -15,11 +15,13 @@ const weatherSlice = createSlice({
             state.loading = !state.loading
         },
         fetchWeatherSuccess(state, action){
-            state.location = action.payload.loction;
+            state.location = action.payload.location;
             state.weather = action.payload.weather;
+            state.loading = !state.loading;
         },
         fetchWeatherFail(state, action){
             state.error = action.payload.error;
+            state.loading = !state.loading;
         }
     }
 });
