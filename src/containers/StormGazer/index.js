@@ -6,6 +6,11 @@ import axios from "axios";
 import classes from "./StormGazer.module.css";
 
 import Background from "../../components/Background";
+import Infoblock from "../../components/InfoBlock";
+import CurrentWeather from "../../components/CurrentWeather";
+import Humidity from "../../components/Humidity";
+import Location from "../../components/Location";
+import Temperature from "../../components/Temperature";
 import Spinner from "../../shared/UI/Spinner";
 
 const StormGazer = (props) => {
@@ -57,28 +62,13 @@ const StormGazer = (props) => {
     setRandomImageIndex(Math.round(Math.random() * 4));
   }, []);
 
-  useEffect(() => {
-    //can only check to see if state changes are in effect in useEffect.
-    //null is given anywhere else
-    if (location && weather) {
-      console.log(location.state);
-      setIcon(weather.weather[0].icon); //sets icon prop to the icon from the weather API. sent to background
-      console.log(weather);
-      console.log(weather.weather[0].icon);
-    }
-  }, [location, weather]);
-
-  const getData = () => {
-    console.log(location);
-    // setIcon(weather.name);
-  };
-
   const submitHandler = (event) => {
     event.preventDefault();
     ApiCall(zipCode);
     setRandomImageIndex(Math.round(Math.random() * 4)); // set random number prop to the background component
-    getData();
   };
+
+
   return (
     <Background icon={icon} imageIndex={randomImageIndex}>
       <form
@@ -92,7 +82,14 @@ const StormGazer = (props) => {
           onChange={(e) => setZipCode(e.target.value)}
         />
         {loading && <Spinner />}
-        {weather && location ? <p> This is here?!?!? </p> : ""}
+        {weather && location && (
+          <Infoblock>
+            <Location city={location.city} state={location.state} />
+            <Temperature temp={Math.round(weather.main.temp)} />
+            <CurrentWeather currentWeather={weather.weather[0].description} />
+            <Humidity humidity={weather.main.humidity} />
+          </Infoblock>
+        )}
         <button>Zip Code</button>
       </form>
     </Background>
