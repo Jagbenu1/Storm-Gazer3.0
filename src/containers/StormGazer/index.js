@@ -12,15 +12,16 @@ import Humidity from "../../components/Humidity";
 import Location from "../../components/Location";
 import Temperature from "../../components/Temperature";
 import Spinner from "../../shared/UI/Spinner";
+import Button from "../../shared/UI/Button";
+import Input from '../../shared/UI/Input';
 
-const StormGazer = (props) => {
+const StormGazer = () => {
   const dispatch = useDispatch();
   const [zipCode, setZipCode] = useState("");
   const [randomImageIndex, setRandomImageIndex] = useState("");
-  const [icon, setIcon] = useState("");
   const location = useSelector((state) => state.location);
   const weather = useSelector((state) => state.weather);
-  const error = useSelector((state) => state.error);
+  // error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.loading);
 
   const weatherKey = keys.weather;
@@ -42,7 +43,7 @@ const StormGazer = (props) => {
       const { latitude, longitude, city, state } = results[zipCode][0];
 
       const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherKey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherKey}&units=imperial`
       );
       dispatch(
         weatherActions.fetchWeatherSuccess({
@@ -65,22 +66,27 @@ const StormGazer = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     ApiCall(zipCode);
+    // setIcon(weather.weather[0].icon);
     setRandomImageIndex(Math.round(Math.random() * 4)); // set random number prop to the background component
   };
 
+  const setWeatherIcon = weather && location ? weather.weather[0].icon : null;
+
 
   return (
-    <Background icon={icon} imageIndex={randomImageIndex}>
+    <Background icon={setWeatherIcon} imageIndex={randomImageIndex}>
       <form
         onSubmit={(event) => submitHandler(event)}
         className={classes["zip-code"]}
       >
-        <label htmlFor="zipCode">Zip Code</label>
-        <input
+        {/* <label htmlFor="zipCode">Zip Code</label> */}
+        <Input
           value={zipCode}
-          id="zipCode"
-          onChange={(e) => setZipCode(e.target.value)}
+          elementType='input'
+          changed={(e) => setZipCode(e.target.value)}
+          placeholder="Zipcode"
         />
+        <Button btnType="success">Submit</Button>
         {loading && <Spinner />}
         {weather && location && (
           <Infoblock>
@@ -90,8 +96,9 @@ const StormGazer = (props) => {
             <Humidity humidity={weather.main.humidity} />
           </Infoblock>
         )}
-        <button>Zip Code</button>
-      </form>
+        
+        </form>
+        
     </Background>
   );
 };
