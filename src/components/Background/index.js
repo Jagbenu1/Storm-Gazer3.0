@@ -13,19 +13,23 @@ const Background = ({ children, icon, imageIndex }) => {
                 // console.log(icon);
                 break;
             case ('01n'):
-                console.log('hello');
+                // console.log('hello');
                 const clearNight = require.context('../../../public/clear-night', true, /\.jpg$/);
                 keys = clearNight.keys().map(key => clearNight(key));
                 backgroundUrl = 'url(' + keys[imageIndex] + ')';
                 // console.log(icon);
                 break;
             case ('03d'):
+            case ('03n'):
+            case ('04d'):
+            case ('04n'):
                 const cloudy = require.context('../../../public/cloudy', true, /\.jpg$/);
                 keys = cloudy.keys().map(key => cloudy(key));
                 backgroundUrl = 'url(' + keys[imageIndex] + ')';
                 // console.log(icon);
                 break;
             case ('50d'):
+            case ('50n'):
                 const fog = require.context('../../../public/fog', true, /\.jpg$/);
                 keys = fog.keys().map(key => fog(key));
                 backgroundUrl = 'url(' + keys[imageIndex] + ')';
@@ -44,6 +48,9 @@ const Background = ({ children, icon, imageIndex }) => {
                 // console.log(icon);
                 break;
             case ('09d'):
+            case ('09n'):
+            case ('10d'):
+            case ('10n'):
                 const rain = require.context('../../../public/rain', true, /\.jpg$/);
                 keys = rain.keys().map(key => rain(key));
                 backgroundUrl = 'url(' + keys[imageIndex] + ')';
@@ -52,6 +59,13 @@ const Background = ({ children, icon, imageIndex }) => {
             case ('13d'):
                 const sleet = require.context('../../../public/sleet', true, /\.jpg$/);
                 keys = sleet.keys().map(key => sleet(key));
+                backgroundUrl = 'url(' + keys[imageIndex] + ')';
+                // console.log(icon);
+                break;
+            case ('11d'):
+            case ('11n'):
+                const thunder = require.context('../../../public/thunderstorm', true, /\.jpg$/);
+                keys = thunder.keys().map(key => thunder(key));
                 backgroundUrl = 'url(' + keys[imageIndex] + ')';
                 // console.log(icon);
                 break;
@@ -75,7 +89,7 @@ const Background = ({ children, icon, imageIndex }) => {
         return backgroundUrl;
     }
 
-    console.log(icon);
+    // console.log(icon);
 
     return (
         <div className={classes.Background} style={{backgroundImage: backgroundSwitch()}}>

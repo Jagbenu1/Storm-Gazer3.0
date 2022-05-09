@@ -20,7 +20,6 @@ const weatherSlice = createSlice({
             state.loading = !state.loading;
         },
         fetchWeatherFail(state, action){
-            state.error = action.payload.error;
             state.loading = !state.loading;
         }
     }

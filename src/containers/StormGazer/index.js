@@ -14,14 +14,15 @@ import Temperature from "../../components/Temperature";
 import Spinner from "../../shared/UI/Spinner";
 import Button from "../../shared/UI/Button";
 import Input from '../../shared/UI/Input';
+import Error from '../../shared/UI/Error';
 
 const StormGazer = () => {
   const dispatch = useDispatch();
   const [zipCode, setZipCode] = useState("");
+  const [error, setError] = useState(false);
   const [randomImageIndex, setRandomImageIndex] = useState("");
   const location = useSelector((state) => state.location);
   const weather = useSelector((state) => state.weather);
-  // error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.loading);
 
   const weatherKey = keys.weather;
@@ -31,7 +32,7 @@ const StormGazer = () => {
     //This has now been restructured based on destructuring.
     //both api calls are no longer nested and they are able to get certain data without
     //getting all of the data
-    console.log(zipCode);
+    // console.log(zipCode);
     try {
       dispatch(weatherActions.fetchWeatherStart());
       const {
@@ -51,23 +52,27 @@ const StormGazer = () => {
           weather: data,
         })
       );
+      setError(false);
     } catch (error) {
       dispatch(weatherActions.fetchWeatherFail());
-      console.log(zipCode);
-      console.log(error);
+      setError(true);
+      // console.log(zipCode);
+      // console.log(error);
     }
   };
 
   useEffect(() => {
     //random number for background component is set at mounting of component
-    setRandomImageIndex(Math.round(Math.random() * 4));
-  }, []);
+    setRandomImageIndex(Math.round(Math.random() * 5));
+    console.log(error);
+  }, [error]);
 
   const submitHandler = (event) => {
     event.preventDefault();
     ApiCall(zipCode);
     // setIcon(weather.weather[0].icon);
-    setRandomImageIndex(Math.round(Math.random() * 4)); // set random number prop to the background component
+    setRandomImageIndex(Math.round(Math.random() * 5)); // set random number prop to the background component
+    // console.log(randomImageIndex);
   };
 
   const setWeatherIcon = weather && location ? weather.weather[0].icon : null;
@@ -88,14 +93,15 @@ const StormGazer = () => {
         />
         <Button btnType="success">Submit</Button>
         {loading && <Spinner />}
-        {weather && location && (
+        {!error && weather && location && (
           <Infoblock>
             <Location city={location.city} state={location.state} />
+            <CurrentWeather currentWeather={weather.weather[0].description} icon={setWeatherIcon}/>
             <Temperature temp={Math.round(weather.main.temp)} />
-            <CurrentWeather currentWeather={weather.weather[0].description} />
             <Humidity humidity={weather.main.humidity} />
           </Infoblock>
         )}
+        {error && <p>Your zipcode seems to be unavailable. PLease put in another.</p>}
         
         </form>
         
