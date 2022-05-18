@@ -99,7 +99,7 @@ const StormGazer = () => {
           </Infoblock>
         )}
         {error && (
-          <p>Your zipcode seems to be unavailable. PLease put in another.</p>
+          <p>Your zipcode seems to be unavailable. Please put in another.</p>
         )}
       </form>
     </Background>
