@@ -14,7 +14,7 @@ import Temperature from "../../components/Temperature";
 import Spinner from "../../shared/UI/Spinner";
 import Button from "../../shared/UI/Button";
 import Input from '../../shared/UI/Input';
-import Error from '../../shared/UI/Error';
+// import Error from '../../shared/UI/Error';
 
 const StormGazer = () => {
   const dispatch = useDispatch();
