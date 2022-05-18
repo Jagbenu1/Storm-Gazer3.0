@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { keys } from "../../.keys";
 import { useDispatch, useSelector } from "react-redux";
+
+import { keys } from "../../.keys";
 import { weatherActions } from "../../store/index";
+
 import axios from "axios";
 import classes from "./StormGazer.module.css";
 
@@ -13,8 +15,7 @@ import Location from "../../components/Location";
 import Temperature from "../../components/Temperature";
 import Spinner from "../../shared/UI/Spinner";
 import Button from "../../shared/UI/Button";
-import Input from '../../shared/UI/Input';
-// import Error from '../../shared/UI/Error';
+import Input from "../../shared/UI/Input";
 
 const StormGazer = () => {
   const dispatch = useDispatch();
@@ -56,27 +57,21 @@ const StormGazer = () => {
     } catch (error) {
       dispatch(weatherActions.fetchWeatherFail());
       setError(true);
-      // console.log(zipCode);
-      // console.log(error);
     }
   };
 
   useEffect(() => {
     //random number for background component is set at mounting of component
     setRandomImageIndex(Math.round(Math.random() * 5));
-    console.log(error);
   }, [error]);
 
   const submitHandler = (event) => {
     event.preventDefault();
     ApiCall(zipCode);
-    // setIcon(weather.weather[0].icon);
     setRandomImageIndex(Math.round(Math.random() * 5)); // set random number prop to the background component
-    // console.log(randomImageIndex);
   };
 
   const setWeatherIcon = weather && location ? weather.weather[0].icon : null;
-
 
   return (
     <Background icon={setWeatherIcon} imageIndex={randomImageIndex}>
@@ -84,10 +79,9 @@ const StormGazer = () => {
         onSubmit={(event) => submitHandler(event)}
         className={classes["zip-code"]}
       >
-        {/* <label htmlFor="zipCode">Zip Code</label> */}
         <Input
           value={zipCode}
-          elementType='input'
+          elementType="input"
           changed={(e) => setZipCode(e.target.value)}
           placeholder="Zipcode"
         />
@@ -96,15 +90,18 @@ const StormGazer = () => {
         {!error && weather && location && (
           <Infoblock>
             <Location city={location.city} state={location.state} />
-            <CurrentWeather currentWeather={weather.weather[0].description} icon={setWeatherIcon}/>
+            <CurrentWeather
+              currentWeather={weather.weather[0].description}
+              icon={setWeatherIcon}
+            />
             <Temperature temp={Math.round(weather.main.temp)} />
             <Humidity humidity={weather.main.humidity} />
           </Infoblock>
         )}
-        {error && <p>Your zipcode seems to be unavailable. PLease put in another.</p>}
-        
-        </form>
-        
+        {error && (
+          <p>Your zipcode seems to be unavailable. PLease put in another.</p>
+        )}
+      </form>
     </Background>
   );
 };

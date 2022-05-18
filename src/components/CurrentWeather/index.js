@@ -1,5 +1,5 @@
 import classes from './CurrentWeather.module.css';
-import "./weather-icons.min.css";
+import "./css/weather-icons.css";
 
 const currentWeather = (props) => {
     let iconImage = null;
