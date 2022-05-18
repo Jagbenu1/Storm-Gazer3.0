@@ -62,13 +62,13 @@ const StormGazer = () => {
 
   useEffect(() => {
     //random number for background component is set at mounting of component
-    setRandomImageIndex(Math.round(Math.random() * 5));
+    setRandomImageIndex(Math.round(Math.random() * 4));
   }, [error]);
 
   const submitHandler = (event) => {
     event.preventDefault();
     ApiCall(zipCode);
-    setRandomImageIndex(Math.round(Math.random() * 5)); // set random number prop to the background component
+    setRandomImageIndex(Math.round(Math.random() * 4)); // set random number prop to the background component
   };
 
   const setWeatherIcon = weather && location ? weather.weather[0].icon : null;
