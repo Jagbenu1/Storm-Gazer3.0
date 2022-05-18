@@ -87,7 +87,7 @@ const StormGazer = () => {
         />
         <Button btnType="success">Submit</Button>
         {loading && <Spinner />}
-        {!error && weather && location && (
+        {!error && weather && location && !loading && (
           <Infoblock>
             <Location city={location.city} state={location.state} />
             <CurrentWeather
@@ -98,8 +98,8 @@ const StormGazer = () => {
             <Humidity humidity={weather.main.humidity} />
           </Infoblock>
         )}
-        {error && (
-          <p>Your zipcode seems to be unavailable. Please put in another.</p>
+        {error && !loading && (
+          <p style={{color: 'red'}}>Your zipcode seems to be unavailable. Please put in another.</p>
         )}
       </form>
     </Background>
