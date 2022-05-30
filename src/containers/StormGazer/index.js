@@ -83,25 +83,27 @@ const StormGazer = () => {
           value={zipCode}
           elementType="input"
           changed={(e) => setZipCode(e.target.value)}
-          placeholder="Zipcode"
+          placeholder="Input Zipcode"
         />
         <Button btnType="success">Submit</Button>
-        {loading && <Spinner />}
-        {!error && weather && location && !loading && (
-          <Infoblock>
-            <Location city={location.city} state={location.state} />
-            <CurrentWeather
-              currentWeather={weather.weather[0].description}
-              icon={setWeatherIcon}
-            />
-            <Temperature temp={Math.round(weather.main.temp)} />
-            <Humidity humidity={weather.main.humidity} />
-          </Infoblock>
-        )}
-        {error && !loading && (
-          <p style={{color: 'red'}}>Your zipcode seems to be unavailable. Please put in another.</p>
-        )}
       </form>
+      {loading && <Spinner />}
+      {!error && weather && location && !loading && (
+        <Infoblock>
+          <Location city={location.city} state={location.state} />
+          <CurrentWeather
+            currentWeather={weather.weather[0].description}
+            icon={setWeatherIcon}
+          />
+          <Temperature temp={Math.round(weather.main.temp)} />
+          <Humidity humidity={weather.main.humidity} />
+        </Infoblock>
+      )}
+      {error && !loading && (
+        <p style={{ color: "red" }}>
+          Your zipcode seems to be unavailable. Please put in another.
+        </p>
+      )}
     </Background>
   );
 };
