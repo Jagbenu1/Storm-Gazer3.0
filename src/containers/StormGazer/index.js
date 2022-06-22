@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { keys } from "../../.keys";
+import { keys } from "../../config/keys";
 import { weatherActions } from "../../store/index";
 
 import axios from "axios";
@@ -16,6 +16,7 @@ import Temperature from "../../components/Temperature";
 import Spinner from "../../shared/UI/Spinner";
 import Button from "../../shared/UI/Button";
 import Input from "../../shared/UI/Input";
+
 
 const StormGazer = () => {
   const dispatch = useDispatch();
