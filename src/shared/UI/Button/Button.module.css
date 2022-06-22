@@ -6,14 +6,13 @@
   cursor: pointer;
   font: inherit;
   padding: 10px;
-  margin: 10px;
+  margin: 0 auto;
   font-weight: bold;
 }
 
-.Button:first-of-type {
+/* .Button:first-of-type {
   margin-left: 0;
-  padding-left: 0;
-}
+} */
 
 .Button:disabled {
   color: #ccc;
