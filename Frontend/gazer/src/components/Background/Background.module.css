@@ -1,0 +1,13 @@
+.Background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* -webkit-background-size: cover;
+  -moz-background-size: contain;
+  -o-background-size: cover; */
+  background-size: cover;
+  text-align: center;
+}

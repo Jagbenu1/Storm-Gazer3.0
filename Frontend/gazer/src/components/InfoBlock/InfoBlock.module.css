@@ -1,0 +1,28 @@
+.InfoBlock {
+  text-align: center;
+  color: white;
+  border-radius: 50px;
+  border: 5px solid white;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 25px;
+  width: 20%;
+  height: 75%;
+}
+
+@media only screen and (max-width: 600px) {
+  .InfoBlock {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .InfoBlock {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .InfoBlock {
+    width: 20%;
+  }
+}
