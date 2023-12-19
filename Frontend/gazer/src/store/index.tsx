@@ -6,6 +6,5 @@ const store = configureStore({
   reducer: weatherSlice.reducer,
 });
 
-export const weatherActions = weatherSlice.actions;
-
+export type RootState = ReturnType<typeof store.getState>;
 export default store;

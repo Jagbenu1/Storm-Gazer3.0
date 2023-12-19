@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialWeatherState = {
-  location: null,
-  weather: null,
+export interface WeatherState {
+  location: {};
+  weather: {};
+  loading: boolean;
+}
+
+const initialWeatherState: WeatherState = {
+  location: {},
+  weather: {},
   loading: false,
-  error: null,
 };
 
 const weatherSlice = createSlice({
