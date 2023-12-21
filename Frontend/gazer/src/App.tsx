@@ -6,7 +6,17 @@ import axios from 'axios';
 
 const App = () => {
   useEffect(() => {
-    axios.get('/getWeatherData', {});
+    const getWeather = async () => {
+      const { data } = await axios.get('/getWeatherData', {
+        params: {
+          zipCode: 30075,
+        },
+      });
+
+      console.log(data);
+    };
+
+    getWeather();
   }, []);
   return <StormGazer />;
 };
